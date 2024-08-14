@@ -16,11 +16,29 @@
         const my_canvas = document.getElementById('my_canvas') 
         const ctx = my_canvas.getContext('2d')
         ctx.fillStyle="rgba(38, 89, 162, 0.7)"
-        ctx.fillRect(100,100,100,100)
+        ctx.fillRect(50,50,100,100)
         ctx.fillStyle="rgba(136, 20, 118 , 0.7)"
         ctx.fillRect(180,180,100,100)
         ctx.fillStyle="rgba(59, 196, 40 , 0.7)"
         ctx.fillRect(260,260,100,100)
+        
+        ctx.lineWidth = 4
+        ctx.strokeStyle="rgba(255, 155, 27 , 0.7)"
+        ctx.strokeRect(340,340,100,100)
+
+        ctx.beginPath()
+        ctx.moveTo(450,100)
+        ctx.lineTo(350,200)
+        ctx.closePath()
+        ctx.stroke()
+
+        ctx.beginPath()
+        ctx.moveTo(150,350)
+        ctx.lineTo(80,450)
+        ctx.lineTo(200,450)
+        ctx.closePath()
+        ctx.stroke()
+        ctx.fill()
     </script>
 </body>
 </html>
