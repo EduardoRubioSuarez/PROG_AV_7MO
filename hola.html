@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <canvas id="my_canvas" width="500" height="500"></canvas>
+    <canvas id="my_canvas" width="1000" height="500"></canvas>
     <script type="text/javascript">
         const my_canvas = document.getElementById('my_canvas') 
         const ctx = my_canvas.getContext('2d')
@@ -39,6 +39,22 @@
         ctx.closePath()
         ctx.stroke()
         ctx.fill()
+
+        ctx.strokeStyle="rgba(255, 255, 255 , 0.7)"
+        ctx.beginPath();
+        ctx.arc(570, 275, 50, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(570, 275, 30, 2, 1.5 * Math.PI);
+        ctx.stroke();
+
+        ctx.strokeStyle="rgba(255, 232, 1, 0.7)"
+        ctx.beginPath();
+        ctx.arc(700, 275, 50, 0, 2 * Math.PI);
+        ctx.stroke();
+
     </script>
 </body>
 </html>
