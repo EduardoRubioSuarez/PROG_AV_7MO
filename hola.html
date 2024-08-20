@@ -61,6 +61,13 @@
         ctx.fillStyle="rgba(255, 232, 1, 0.7)"
         ctx.fillText("Hello sebas!", 650, 400);
 
+        var grd = ctx.createLinearGradient(0, 0, 1700, 500);
+        grd.addColorStop(0, "#4CD900");
+        grd.addColorStop(1, "#CC00D9");
+        ctx.fillStyle = grd;
+        ctx.fillRect(600, 50, 300, 100);
+
+
     </script>
 </body>
 </html>
