@@ -17,19 +17,23 @@
         const ctx = my_canvas.getContext('2d');
         
         my_canvas.addEventListener("click", (event) => {
-                ctx.fillStyle = getRandomColor();
                 ctx.beginPath();
                 ctx.arc(event.x, event.y, 50, 0, 2 * Math.PI);
                 ctx.fill();
                 ctx.stroke();
+
+                my_canvas.addEventListener("mouseover", (event) => {
+                    ctx.fillStyle = getRandomColor();
+                });
         });
 
         function getRandomColor() {
-            var letters = '0123456789ABCDEF';
-            var color = '#';
-            for (var i = 0; i < 6; i++) {
-                color += letters[Math.floor(Math.random() * 16)];
+            var trans = '0.5'; // 50% transparency
+            var color = 'rgba(';
+            for (var i = 0; i < 3; i++) {
+                color += Math.floor(Math.random() * 255) + ',';
             }
+            color += trans + ')'; // add the transparency
             return color;
         }
 
