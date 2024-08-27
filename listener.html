@@ -15,18 +15,38 @@
     <script type="text/javascript">
         const my_canvas = document.getElementById('my_canvas');
         const ctx = my_canvas.getContext('2d');
-        
-        my_canvas.addEventListener("click", (event) => {
-                ctx.beginPath();
-                ctx.arc(event.x, event.y, 50, 0, 2 * Math.PI);
-                ctx.fill();
-                ctx.stroke();
+        var figura = 1;
 
-                my_canvas.addEventListener("mouseover", (event) => {
-                    ctx.fillStyle = getRandomColor();
-                });
-        });
+		my_canvas.addEventListener("click",function(e){ 
 
+			if (figura == 1) {
+				ctx.beginPath();
+				ctx.arc(e.x,e.y,60,0,2 * Math.PI)
+				ctx.stroke()
+				ctx.fill()
+			}else{
+
+				ctx.fillRect(e.x - 50,e.y-50,100,100)
+				ctx.strokeRect(e.x - 50,e.y-50,100,100)
+			}
+
+		})
+
+		my_canvas.addEventListener("mouseover",function(e){
+			ctx.fillStyle = getRandomColor();
+		})
+
+		my_canvas.addEventListener("mouseout",function(e){
+			figura = (figura==1)?2:1;
+		})
+
+        my_canvas.addEventListener("mousemove",function(e){
+            ctx.beginPath();
+            ctx.arc(e.x,e.y,1,0,2 * Math.PI)
+            ctx.stroke()
+        })
+                
+                
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
             var color = 'rgba(';
