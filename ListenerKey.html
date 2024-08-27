@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas{
+            background-color: lightslategray;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="my_canvas" width="700" height="500"></canvas>
+    <script type="text/javascript">
+        const my_canvas = document.getElementById('my_canvas');
+        const ctx = my_canvas.getContext('2d');
+
+        document.addEventListener("keypress",(e)=>{ 
+
+            let w = Math.random() * 650;
+            let h = Math.random() * 450;
+
+            ctx.fillStyle = getRandomColor();
+            ctx.fillRect(w , h, 70, 70);
+            ctx.strokeRect(w , h, 70, 70);
+            ctx.font = "35px Arial";
+            ctx.strokeText(e.key, w+10,h+20);
+        })
+
+        function getRandomColor() {
+            var trans = '0.5'; // 50% transparency
+            var color = 'rgba(';
+            for (var i = 0; i < 3; i++) {
+                color += Math.floor(Math.random() * 255) + ',';
+            }
+            color += trans + ')'; // add the transparency
+            return color;
+        }
+
+
+    </script>
+    
+</body>
+</html>
