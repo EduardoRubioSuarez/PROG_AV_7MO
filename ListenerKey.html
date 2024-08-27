@@ -16,16 +16,28 @@
         const my_canvas = document.getElementById('my_canvas');
         const ctx = my_canvas.getContext('2d');
 
+        ctx.fillStyle = getRandomColor();
+        ctx.fillRect(350 , 250, 70, 70);
+        ctx.strokeRect(350 , 250, 70, 70);
+
+        let w = 350;
+        let h = 250;
+
         document.addEventListener("keypress",(e)=>{ 
 
-            let w = Math.random() * 650;
-            let h = Math.random() * 450;
+            if(e.keyCode == 119){
+                h-=10;    //w
+            }if(e.keyCode == 115){
+                h+=10;    //s
+            }if(e.keyCode == 97){
+                w-=10;    //a
+            }if(e.keyCode == 100){
+                w+=10;    //d
+            }
 
             ctx.fillStyle = getRandomColor();
             ctx.fillRect(w , h, 70, 70);
             ctx.strokeRect(w , h, 70, 70);
-            ctx.font = "35px Arial";
-            ctx.strokeText(e.key, w+10,h+20);
         })
 
         function getRandomColor() {
