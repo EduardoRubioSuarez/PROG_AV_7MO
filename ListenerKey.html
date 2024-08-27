@@ -6,7 +6,7 @@
     <title>Document</title>
     <style>
         canvas{
-            background-color: lightslategray;
+            background-color: rgb(119, 136, 153);
         }
     </style>
 </head>
@@ -34,6 +34,9 @@
             }if(e.keyCode == 100){
                 w+=10;    //d
             }
+
+            ctx.fillStyle =  "rgb(119, 136, 153)";
+            ctx.fillRect(0 , 0, 700, 500);
 
             ctx.fillStyle = getRandomColor();
             ctx.fillRect(w , h, 70, 70);
