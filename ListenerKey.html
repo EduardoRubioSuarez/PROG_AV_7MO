@@ -20,28 +20,52 @@
         ctx.fillRect(350 , 250, 70, 70);
         ctx.strokeRect(350 , 250, 70, 70);
 
-        let w = 350;
-        let h = 250;
+        let x = 350;
+        let y = 250;
+        var tecla;
+        var speed=10;
 
-        document.addEventListener("keypress",(e)=>{ 
-
-            if(e.keyCode == 119){
-                h-=10;    //w
-            }if(e.keyCode == 115){
-                h+=10;    //s
-            }if(e.keyCode == 97){
-                w-=10;    //a
-            }if(e.keyCode == 100){
-                w+=10;    //d
+        function update(){
+            if(tecla == "up"){
+                y-=10;    //w
+            }if(tecla == "down"){
+                y+=10;    //s
+            }if(tecla == "left"){
+                x-=10;    //a
+            }if(tecla == "right"){
+                x+=10;    //d
             }
+        }
 
+        function pintar(){
             ctx.fillStyle =  "rgb(119, 136, 153)";
             ctx.fillRect(0 , 0, 700, 500);
 
             ctx.fillStyle = getRandomColor();
-            ctx.fillRect(w , h, 70, 70);
-            ctx.strokeRect(w , h, 70, 70);
+            ctx.fillRect(x , y, 70, 70);
+            ctx.strokeRect(x , y, 70, 70);
+
+            update();
+            requestAnimationFrame(pintar);
+        }
+
+        document.addEventListener("keypress",(e)=>{ 
+            if(e.keyCode == 119){
+                tecla="up"    //w
+            }if(e.keyCode == 115){
+                tecla="down"  //s
+            }if(e.keyCode == 97){
+                tecla="left"  //a
+            }if(e.keyCode == 100){
+                tecla="right" //d
+            }
+            if(e.keyCode == 32){
+                speed+=10;
+            }
         })
+
+        requestAnimationFrame(pintar);
+
 
         function getRandomColor() {
             var trans = '0.5'; // 50% transparency
