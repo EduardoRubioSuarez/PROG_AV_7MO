@@ -27,22 +27,22 @@
 
         function update(){
             if(tecla == "up"){
-                y-=10;    //w
+                y-=speed;    //w
                 if(y+70 <=-40){
                     y=540
                 }
             }if(tecla == "down"){
-                y+=10;    //s
+                y+=speed;    //s
                 if(y+70 >=540){
                     y=-40
                 }
             }if(tecla == "left"){
-                x-=10;    //a
+                x-=speed;    //a
                 if(x+70 <=-40){
                     x=740
                 }
             }if(tecla == "right"){
-                x+=10;    //d
+                x+=speed;    //d
                 if(x+70 >=740){
                     x=-40
                 }
