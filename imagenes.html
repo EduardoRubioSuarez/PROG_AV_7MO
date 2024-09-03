@@ -60,10 +60,82 @@
         ctx.closePath()
         ctx.fill()
         
-        
 
-            
+
+        ctx.fillStyle="rgba(255, 198, 110, 1)"
+        ctx.beginPath();
+        ctx.arc(450, 180, 50, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.fillRect(428,210,45,50)
+
+        ctx.fillStyle="black"
+        ctx.fillRect(400,240,100,150)
+        ctx.fillRect(400,350,40,140)
+        ctx.fillRect(460,350,40,140)
+        ctx.fillRect(390,470,50,25)
+        ctx.fillRect(460,470,50,25)
+
+        ctx.beginPath()
+        ctx.moveTo(400,240)
+        ctx.lineTo(400,270)
+        ctx.lineTo(325,370)
+        ctx.lineTo(320,350)
+        ctx.closePath()
+        ctx.fill()
         
+        ctx.beginPath()
+        ctx.moveTo(500,240)
+        ctx.lineTo(500,270)
+        ctx.lineTo(575,370)
+        ctx.lineTo(585,350)
+        ctx.closePath()
+        ctx.fill()
+
+        ctx.fillStyle="rgba(255, 198, 110, 1)"
+        ctx.beginPath();
+        ctx.arc(325, 355, 15, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(576, 355, 15, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.fillStyle="white"
+        ctx.beginPath();
+        ctx.arc(470, 170, 10, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(430, 170, 10, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.fillStyle="black"
+        ctx.beginPath();
+        ctx.arc(470, 170, 5, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(430, 170, 5, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(450, 195, 20, 0, 1 * Math.PI);
+        ctx.stroke();
+
+        ctx.strokeStyle= "rgba(214, 214, 214, 1)"
+        ctx.beginPath();
+        ctx.arc(450, 240, 25, 0, 1 * Math.PI);
+        ctx.stroke();
+
+        ctx.fillStyle="red"
+        ctx.fillRect(400,360,100,8)
+
+        var img = new Image();
+        img.src = "sombrero.png";
+        img.onload = function(){
+            ctx.drawImage(img, 400, 80, 130, 100);
+        }
+
     </script>
 </body>
 </html>
