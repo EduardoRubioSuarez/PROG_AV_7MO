@@ -6,7 +6,7 @@
     <title>Canvas</title>
     <style>
         canvas{
-            background-color: blue;
+            background-color: cyan;
         }
     </style>
 </head>
@@ -16,75 +16,72 @@
         const my_canvas = document.getElementById('my_canvas');
         const ctx = my_canvas.getContext('2d');
 
-        const tileSize = 50;
-        const rows = 3;
+        const tileSize = 70;
+        const rows = 2;
         const cols = 20;
-        const startY = 350;
+        const startY = 400;
 
         for (let row = 0; row < rows; row++) {
             for (let col = 0; col < cols; col++) {
-                if ((row + col) % 2 == 0) {
-                    ctx.fillStyle = "rgba(138, 48, 0, 1)";
-                } else {
-                    ctx.fillStyle = "rgba(232, 116, 0, 1)"; 
-                }
+                ctx.fillStyle = "#d18b47";
                 ctx.fillRect(col * tileSize, startY + (row * tileSize), tileSize, tileSize);
+
+                ctx.strokeStyle = "black";
+                ctx.lineWidth = 2;
+                ctx.strokeRect(col * tileSize, startY + (row * tileSize), tileSize, tileSize);
+
+                ctx.beginPath();
+                ctx.moveTo(col * tileSize + tileSize / 2, startY + (row * tileSize));
+                ctx.lineTo(col * tileSize + tileSize / 2, startY + (row * tileSize) + tileSize);
+                
+                ctx.moveTo(col * tileSize, startY + (row * tileSize) + tileSize / 2);
+                ctx.lineTo(col * tileSize + tileSize, startY + (row * tileSize) + tileSize / 2);
+                ctx.stroke();
             }
+
+            ctx.fillStyle="rgba(254, 135, 30, 1)"
+            ctx.strokeRect(0,390,1000,20)
+            ctx.fillRect(0,390,1000,20)
+
+            ctx.lineWidth = 4
+            ctx.fillStyle="rgba(191, 98, 0, 1)"
+            ctx.strokeRect(100,220,50,50)
+            ctx.fillRect(100,220,50,50)
+            
+
+            ctx.fillStyle="rgba(191, 98, 0, 1)"
+            ctx.strokeRect(200,120,50,50)
+            ctx.fillRect(200,120,50,50)
+
+            ctx.fillStyle="rgba(191, 98, 0, 1)"
+            ctx.strokeRect(250,120,50,50)
+            ctx.fillRect(250,120,50,50)
+
+            ctx.fillStyle="rgba(191, 98, 0, 1)"
+            ctx.strokeRect(800,190,50,50)
+            ctx.fillRect(800,190,50,50)
+            
+            ctx.fillStyle="rgba(73, 216, 201, 1)"
+            ctx.strokeRect(310,220,120,168)
+            ctx.fillRect(310,220,120,168)
+
+            ctx.fillStyle="rgba(252, 228, 236, 1)"
+            ctx.strokeRect(250,260,120,128)
+            ctx.fillRect(250,260,120,128)
+
+            ctx.fillStyle="rgba(109, 213, 53, 1)"
+            ctx.strokeRect(800,290,120,98)
+            ctx.fillRect(800,290,120,98)
+
+            ctx.fillStyle="rgba(53, 216, 68, 1)"
+            ctx.strokeRect(550,290,80,98)
+            ctx.fillRect(550,290,80,98)
+
+            ctx.fillStyle="rgba(46, 185, 59, 1)"
+            ctx.strokeRect(540,290,100,28)
+            ctx.fillRect(540,290,100,28)
+            
         }
-        ctx.fillStyle = "rgba(50, 205, 50, 1)";
-        const grassHeight = 10; 
-
-        for (let i = 0; i < 3; i++) {
-            ctx.fillRect(0, startY - (i * grassHeight), my_canvas.width, grassHeight);
-        }
-
-        ctx.strokeStyle = "yellow";
-        ctx.lineWidth = 5;
-        ctx.beginPath();
-        ctx.arc(100, 270, 30, 0, 2 * Math.PI);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(200, 270, 30, 0, 2 * Math.PI);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.arc(300, 270, 30, 0, 2 * Math.PI);
-        ctx.stroke();
-
-        ctx.fillStyle="rgba(149, 79, 14, 1)"
-        ctx.fillRect(500,100,30,230)
-
-        ctx.fillStyle="green"
-        ctx.beginPath()
-        ctx.moveTo(525,95)
-        ctx.lineTo(480,125)
-        ctx.lineTo(380,130)
-        ctx.closePath()
-        ctx.fill()
-
-        ctx.beginPath()
-        ctx.moveTo(520,100)
-        ctx.lineTo(680,125)
-        ctx.lineTo(560,130)
-        ctx.closePath()
-        ctx.fill()
-
-        ctx.fillStyle="rgba(36, 175, 5, 1)"
-        ctx.fillRect(800,230,10,100)
-
-        ctx.fillStyle="rgba(237, 203, 11, 1)"
-        ctx.beginPath();
-        ctx.arc(805, 240, 35, 0, 2 * Math.PI);
-        ctx.closePath()
-        ctx.fill()
-        
-        ctx.fillStyle="rgba(147, 132, 66, 1)"
-        ctx.beginPath();
-        ctx.arc(805, 240, 15, 0, 2 * Math.PI);
-        ctx.closePath()
-        ctx.fill()
-
     </script>
 </body>
 </html>
