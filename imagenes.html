@@ -16,72 +16,54 @@
         const my_canvas = document.getElementById('my_canvas');
         const ctx = my_canvas.getContext('2d');
 
-        const tileSize = 70;
-        const rows = 2;
-        const cols = 20;
-        const startY = 400;
+        ctx.fillStyle="rgba(106, 178, 91,1)"
+        ctx.beginPath()
+        ctx.moveTo(200,400)
+        ctx.lineTo(1200,400)
+        ctx.lineTo(800,70)
+        ctx.closePath()
+        ctx.fill()
+        
+        ctx.beginPath()
+        ctx.moveTo(-100,400)
+        ctx.lineTo(700,400)
+        ctx.lineTo(300,40)
+        ctx.closePath()
+        ctx.fill()
+        
+        ctx.fillStyle="rgba(148, 213, 134,1)"
+        ctx.beginPath()
+        ctx.moveTo(900,400)
+        ctx.lineTo(1200,400)
+        ctx.lineTo(800,70)
+        ctx.closePath()
+        ctx.fill()
 
-        for (let row = 0; row < rows; row++) {
-            for (let col = 0; col < cols; col++) {
-                ctx.fillStyle = "#d18b47";
-                ctx.fillRect(col * tileSize, startY + (row * tileSize), tileSize, tileSize);
+        ctx.beginPath()
+        ctx.moveTo(300,325)
+        ctx.lineTo(512,230)
+        ctx.lineTo(300,40)
+        ctx.closePath()
+        ctx.fill()
 
-                ctx.strokeStyle = "black";
-                ctx.lineWidth = 2;
-                ctx.strokeRect(col * tileSize, startY + (row * tileSize), tileSize, tileSize);
+        ctx.lineWidth = 4
+        ctx.fillStyle="rgba(56, 175, 30, 1)"
+        ctx.strokeRect(0,400,1000,100)
+        ctx.fillRect(0,400,1000,100)
 
-                ctx.beginPath();
-                ctx.moveTo(col * tileSize + tileSize / 2, startY + (row * tileSize));
-                ctx.lineTo(col * tileSize + tileSize / 2, startY + (row * tileSize) + tileSize);
-                
-                ctx.moveTo(col * tileSize, startY + (row * tileSize) + tileSize / 2);
-                ctx.lineTo(col * tileSize + tileSize, startY + (row * tileSize) + tileSize / 2);
-                ctx.stroke();
-            }
+        ctx.fillStyle="blue"
+        ctx.beginPath()
+        ctx.moveTo(530,400)
+        ctx.lineTo(580,400)
+        ctx.lineTo(530,500)
+        ctx.lineTo(430,500)
+        ctx.closePath()
+        ctx.fill()
+        
+        
 
-            ctx.fillStyle="rgba(254, 135, 30, 1)"
-            ctx.strokeRect(0,390,1000,20)
-            ctx.fillRect(0,390,1000,20)
-
-            ctx.lineWidth = 4
-            ctx.fillStyle="rgba(191, 98, 0, 1)"
-            ctx.strokeRect(100,220,50,50)
-            ctx.fillRect(100,220,50,50)
             
-
-            ctx.fillStyle="rgba(191, 98, 0, 1)"
-            ctx.strokeRect(200,120,50,50)
-            ctx.fillRect(200,120,50,50)
-
-            ctx.fillStyle="rgba(191, 98, 0, 1)"
-            ctx.strokeRect(250,120,50,50)
-            ctx.fillRect(250,120,50,50)
-
-            ctx.fillStyle="rgba(191, 98, 0, 1)"
-            ctx.strokeRect(800,190,50,50)
-            ctx.fillRect(800,190,50,50)
-            
-            ctx.fillStyle="rgba(73, 216, 201, 1)"
-            ctx.strokeRect(310,220,120,168)
-            ctx.fillRect(310,220,120,168)
-
-            ctx.fillStyle="rgba(252, 228, 236, 1)"
-            ctx.strokeRect(250,260,120,128)
-            ctx.fillRect(250,260,120,128)
-
-            ctx.fillStyle="rgba(109, 213, 53, 1)"
-            ctx.strokeRect(800,290,120,98)
-            ctx.fillRect(800,290,120,98)
-
-            ctx.fillStyle="rgba(53, 216, 68, 1)"
-            ctx.strokeRect(550,290,80,98)
-            ctx.fillRect(550,290,80,98)
-
-            ctx.fillStyle="rgba(46, 185, 59, 1)"
-            ctx.strokeRect(540,290,100,28)
-            ctx.fillRect(540,290,100,28)
-            
-        }
+        
     </script>
 </body>
 </html>
