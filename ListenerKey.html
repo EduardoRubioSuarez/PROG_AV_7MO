@@ -15,37 +15,67 @@
     <script type="text/javascript">
         const my_canvas = document.getElementById('my_canvas');
         const ctx = my_canvas.getContext('2d');
+        var tecla;
 
         ctx.fillStyle = getRandomColor();
         ctx.fillRect(350 , 250, 70, 70);
         ctx.strokeRect(350 , 250, 70, 70);
 
-        let x = 350;
-        let y = 250;
-        var tecla;
-        var speed=10;
+        class rect{
+            constructor(x,y,w,h,c,s){
+                this.x=x
+                this.y=y
+                this.w=w
+                this.h=h
+                this.c=c
+                this.s=s
+            }
+            
+            colision(otro) {
+                if(this.x < otro.x + otro.w &&  
+                this.x + this.w > otro.x &&    
+                this.y < otro.y + otro.h &&    
+                this.y + this.h > otro.y){ 
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+
+            
+        }
+
+        var player = new rect(350,250,50,50,getRandomColor(),10)
+        var obj = new rect(100,100,30,30,getRandomColor(),10)
+
+
 
         function update(){
             if(tecla == "up"){
-                y-=speed;    //w
-                if(y+70 <=-40){
-                    y=540
+                player.y-=player.s;    //w
+                if(player.y+70 <=-40){
+                    player.y=540
                 }
             }if(tecla == "down"){
-                y+=speed;    //s
-                if(y+70 >=540){
-                    y=-40
+                player.y+=player.s;    //s
+                if(player.y+70 >=540){
+                    player.y=-40
                 }
             }if(tecla == "left"){
-                x-=speed;    //a
-                if(x+70 <=-40){
-                    x=740
+                player.x-=player.s;    //a
+                if(player.x+70 <=-40){
+                    player.x=740
                 }
             }if(tecla == "right"){
-                x+=speed;    //d
-                if(x+70 >=740){
-                    x=-40
+                player.x+=player.s;    //d
+                if(player.x+70 >=740){
+                    player.x=-40
                 }
+            }
+
+            if(player.colision(obj)){
+                obj.x = Math.floor(Math.random() * 500)
+                obj.y = Math.floor(Math.random() * 500)
             }
         }
 
@@ -53,9 +83,15 @@
             ctx.fillStyle =  "rgb(119, 136, 153)";
             ctx.fillRect(0 , 0, 700, 500);
 
-            ctx.fillStyle = getRandomColor();
-            ctx.fillRect(x , y, 70, 70);
-            ctx.strokeRect(x , y, 70, 70);
+            //player
+            ctx.fillStyle = player.c;
+            ctx.fillRect(player.x , player.y, player.w, player.h);
+            ctx.strokeRect(player.x , player.y, player.w, player.h);
+
+            //obj
+            ctx.fillStyle =  obj.c;
+            ctx.fillRect(obj.x , obj.y, obj.w, obj.h);
+            ctx.strokeRect(obj.x , obj.y, obj.w, obj.h);
 
             update();
             requestAnimationFrame(pintar);
