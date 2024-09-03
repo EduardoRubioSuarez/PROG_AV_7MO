@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style>
+        canvas{
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="my_canvas" width="1000" height="500"></canvas>
+    <script type="text/javascript">
+        const my_canvas = document.getElementById('my_canvas');
+        const ctx = my_canvas.getContext('2d');
+
+        const tileSize = 50;
+        const rows = 3;
+        const cols = 20;
+        const startY = 350;
+
+        for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+                if ((row + col) % 2 == 0) {
+                    ctx.fillStyle = "rgba(138, 48, 0, 1)";
+                } else {
+                    ctx.fillStyle = "rgba(232, 116, 0, 1)"; 
+                }
+                ctx.fillRect(col * tileSize, startY + (row * tileSize), tileSize, tileSize);
+            }
+        }
+        ctx.fillStyle = "rgba(50, 205, 50, 1)";
+        const grassHeight = 10; 
+
+        for (let i = 0; i < 3; i++) {
+            ctx.fillRect(0, startY - (i * grassHeight), my_canvas.width, grassHeight);
+        }
+
+        ctx.strokeStyle = "yellow";
+        ctx.lineWidth = 5;
+        ctx.beginPath();
+        ctx.arc(100, 270, 30, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(200, 270, 30, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(300, 270, 30, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        ctx.fillStyle="rgba(149, 79, 14, 1)"
+        ctx.fillRect(500,100,30,230)
+
+        ctx.fillStyle="green"
+        ctx.beginPath()
+        ctx.moveTo(525,95)
+        ctx.lineTo(480,125)
+        ctx.lineTo(380,130)
+        ctx.closePath()
+        ctx.fill()
+
+        ctx.beginPath()
+        ctx.moveTo(520,100)
+        ctx.lineTo(680,125)
+        ctx.lineTo(560,130)
+        ctx.closePath()
+        ctx.fill()
+
+        ctx.fillStyle="rgba(36, 175, 5, 1)"
+        ctx.fillRect(800,230,10,100)
+
+        ctx.fillStyle="rgba(237, 203, 11, 1)"
+        ctx.beginPath();
+        ctx.arc(805, 240, 35, 0, 2 * Math.PI);
+        ctx.closePath()
+        ctx.fill()
+        
+        ctx.fillStyle="rgba(147, 132, 66, 1)"
+        ctx.beginPath();
+        ctx.arc(805, 240, 15, 0, 2 * Math.PI);
+        ctx.closePath()
+        ctx.fill()
+
+    </script>
+</body>
+</html>
