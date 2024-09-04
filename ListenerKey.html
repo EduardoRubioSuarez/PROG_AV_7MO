@@ -81,12 +81,13 @@
                 obj.y = Math.floor(Math.random() * 500)
             }
 
-            /*if(obstaculo.colision(obj)){
-                obj.x = Math.floor(Math.random() * 660)
-                obj.y = Math.floor(Math.random() * 400)
-            }*/
-
+            
             obstaculos.forEach(function (obstaculo, indice, array) {
+                if(obstaculo.colision(obj)){
+                    obj.x = Math.floor(Math.random() * 660)
+                    obj.y = Math.floor(Math.random() * 400)
+                }
+                
                 if(player.colision(obstaculo
                 )){
                     if(tecla == "up"){
