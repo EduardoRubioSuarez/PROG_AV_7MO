@@ -19,8 +19,14 @@
         var obstaculos = [];
         var pause = false
         var score = 0
+        var playerImg = new Image();
+        playerImg.src = "ladron.png";
+        const audio = new Audio("sonidoMonedas.mp3");
 
-        ctx.fillStyle = getRandomColor();
+        var objImg = new Image();
+        objImg.src = "moneda.png";
+
+        ctx.fillStyle = "white";
         ctx.fillRect(350 , 250, 70, 70);
         ctx.strokeRect(350 , 250, 70, 70);
 
@@ -48,10 +54,10 @@
             
         }
 
-        var player = new rect(350,250,50,50,getRandomColor(),10)
-        var obj = new rect(100,100,30,30,getRandomColor(),10)
-        obstaculos.push(new rect(100,350,350,30,getRandomColor(),10))
-        obstaculos.push(new rect(100,50,350,30,getRandomColor(),10)) 
+        var player = new rect(350,250,50,50,"white",5)
+        var obj = new rect(100,100,30,30,"white",10)
+        obstaculos.push(new rect(100,350,350,30,"white",10))
+        obstaculos.push(new rect(100,50,350,30,"white",10)) 
 
 
 
@@ -81,8 +87,10 @@
 
             if(player.colision(obj)){
                 obj.x = Math.floor(Math.random() * 500)
-                obj.y = Math.floor(Math.random() * 500)
+                obj.y = Math.floor(Math.random() * 450)
                 score += 10
+                player.s = player.s+1;
+                audio.play();
             }
 
             
@@ -108,19 +116,15 @@
         }
     
             
-            function pintar(){
+        function pintar(){
             ctx.fillStyle =  "rgb(119, 136, 153)";
             ctx.fillRect(0 , 0, 700, 500);
 
             //player
-            ctx.fillStyle = player.c;
-            ctx.fillRect(player.x , player.y, player.w, player.h);
-            ctx.strokeRect(player.x , player.y, player.w, player.h);
-
+            ctx.drawImage(playerImg,player.x , player.y, player.w, player.h);
+            
             //obj
-            ctx.fillStyle =  obj.c;
-            ctx.fillRect(obj.x , obj.y, obj.w, obj.h);
-            ctx.strokeRect(obj.x , obj.y, obj.w, obj.h);
+            ctx.drawImage(objImg,obj.x , obj.y, obj.w, obj.h);
 
             //obstaculo
             obstaculos.forEach(function (obstaculo, i, array) {
@@ -129,11 +133,16 @@
                 ctx.strokeRect(obstaculo.x , obstaculo.y, obstaculo.w, obstaculo.h);
             });
 
+            //MARCADOR PUNTOS
             ctx.font = "20px Arial";
             ctx.strokeStyle="rgba(0, 0, 0, 0.7)"
-            ctx.strokeText("Score: "+score, 600,30);
+            ctx.strokeText("Score: "+score, 550,30);
+            ctx.fillStyle="yellow"
+            ctx.fillText("Score: "+score, 550, 30);
+
+            //MARCADOR VELOCIDAD 
             ctx.fillStyle="rgba(0, 0, 0, 0.7)"
-            ctx.fillText("Score: "+score, 600, 30);
+            ctx.fillText("Velocidad: "+player.s, 550, 60);
 
             if(pause==true){
                 ctx.fillRect(0 , 0, 700, 500);
@@ -169,17 +178,6 @@
         })
 
         requestAnimationFrame(pintar);
-
-
-        function getRandomColor() {
-            var trans = '0.5'; // 50% transparency
-            var color = 'rgba(';
-            for (var i = 0; i < 3; i++) {
-                color += Math.floor(Math.random() * 255) + ',';
-            }
-            color += trans + ')'; // add the transparency
-            return color;
-        }
 
 
     </script>
