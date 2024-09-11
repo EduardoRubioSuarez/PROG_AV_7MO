@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+	
+	<div id="main">
+
+		<h2>
+			Bienvenido a la aplicación: {{ title }}
+		</h2>
+		
+		<form>
+			<fieldset>
+				<label>
+					Nombre: 
+				</label>
+				<input v-model="name"  placeholder="write Here" name="">
+			</fieldset>
+		</form>
+
+		<h4>
+			Hola: {{ name }}
+		</h4>
+
+		<button @click="contador++" >
+			Click me: {{ contador }}
+		</button>
+
+		<hr>
+
+		<input type="number" v-model="num1" name="">
+		<br>
+		<input type="number" v-model="num2" name="">
+		<br>
+		<button v-on:click="resultado=num1+num2">
+			Sumar
+		</button>
+		<br>
+		<label>
+			Resultado: {{ resultado }}
+		</label>
+
+        
+        <ul>
+            <li v-for="(item, index) in Users" ::key="index">
+                {{ item.nombre }} - {{ item.puesto }}
+            </li>
+        </ul>
+        
+        <input type="text" id="nombreInput">
+        <br>
+        <input type="text" id="puestoInput">
+        <br>
+        <button @click=IngresarUsuario>Ingresar</button>
+
+	</div>
+
+	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+	<script>
+	  const { createApp, ref } = Vue
+
+	createApp({
+	    
+	    setup() {
+
+            const title = ref('Hello vue!')
+            let name = ref('')
+            let contador = ref(0)
+            let resultado = ref(0)
+            let num1 = ref(0)
+            let num2 = ref(0)
+            let nombre = ""
+            let puesto = ""
+
+            let users = ref([
+                {
+                    nombre:"Eduardo",
+                    puesto:"puede"
+                }
+            ])
+
+	      return {
+	        title,
+	        name,
+	        contador,
+	        resultado,
+	        num1,
+	        num2,
+            users,
+            nombre,
+            puesto
+	      }
+	    },
+        methods: {
+            IngresarUsuario(){
+                this.users.push({
+                    nombre : this.nombre,
+                    puesto : this.puesto
+                });
+            }
+        }
+
+	  }).mount('#main')
+	</script>
+</body>
+</html>
