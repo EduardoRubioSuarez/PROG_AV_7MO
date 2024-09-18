@@ -9,21 +9,15 @@
 	
 	<div id="main">
 
-		<h2>
-			Acceso super seguro
-		</h2>
+		<h2>Acceso super seguro</h2>
 		
 		<form v-if="!acceso" @submit.prevent="onSubmit">
 			<fieldset>
-				<label>
-					Nombre: 
-				</label>
+				<label>Nombre: </label>
 				<input v-model="email" placeholder="email Here" name="">
 			</fieldset>
 			<fieldset>
-				<label>
-					Password: 
-				</label>
+				<label>Password: </label>
 				<input v-model="password" placeholder="password Here" type="password" name="">
 			</fieldset>
 			<button type="submit">
@@ -31,45 +25,60 @@
 			</button>
 		</form>
 
-		<p v-if="acceso">Has accedido correctamente.</p>
+		<h3 v-if="acceso">Has accedido correctamente.</h3>
+		<table v-if="acceso">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Correo</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="usuario in usuarios" :key="usuario.id">
+					<td>{{ usuario.id }}</td>
+					<td>{{ usuario.nombre }}</td>
+					<td>{{ usuario.correo }}</td>
+				</tr>
+			</tbody>
+		</table>
 
 	</div>
 
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<script>
-	  	const { createApp, ref } = Vue
+	  const { createApp, ref } = Vue
 
-	  	createApp({
-			setup() {
-				const email = ref('');
-				const password = ref('');
-				const acceso = ref(false);
-				
-				const onSubmit = () => {
-					fetch('./vue.json')
-					.then(response => response.json())
-					.then(datos => {
-						// Verificar las credenciales
-						datos.usuarios.forEach(usuario => {
-							if (usuario.correo === email.value && usuario.contraseña === password.value) {
-								acceso.value = true;
-							}
-						});
-					})
-					.catch(() => {
-						console.log('Error al cargar los datos');
-					});
-				}
-
-				return {
-					email,
-					password,
-					acceso,
-					onSubmit
-				}
-			}
-		}).mount('#main')
-
+	createApp({
+	    data() {
+	      return {
+	        email: '',
+	        password: '',
+	        acceso: false,
+	        usuarios: []
+	      }
+	    },
+	    methods: {
+	      onSubmit() {
+	        fetch('./vue.json')
+	          .then(response => response.json())
+	          .then(datos => {
+	            datos.usuarios.forEach(usuario => {
+	              if (usuario.correo === this.email && usuario.contraseña === this.password) {
+	                this.acceso = true;
+	                this.cargarUsuarios(datos.usuarios);
+	              }
+	            });
+	          })
+	          .catch(() => {
+	            console.log('Error al cargar los datos');
+	          });
+	      },
+	      cargarUsuarios(usuarios) {
+	        this.usuarios = usuarios;
+	      }
+	    }
+	  }).mount('#main')
 	</script>
 </body>
 </html>

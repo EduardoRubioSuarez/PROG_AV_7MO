@@ -1,16 +1,19 @@
 {
   "usuarios": [
     {
+      "id": "1",
       "nombre": "pepe perez",
       "correo": "juan.perez@example.com",
       "contraseña": "contraseña123"
     },
     {
+      "id": "2",
       "nombre": "María Gómez",
       "correo": "maria.gomez@example.com",
       "contraseña": "1234"
     },
     {
+      "id": "3",
       "nombre": "Carlos Ruiz",
       "correo": "carlos.ruiz@example.com",
       "contraseña": "4321"
