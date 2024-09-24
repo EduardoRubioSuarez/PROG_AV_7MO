@@ -3,18 +3,21 @@
     {
       "id": "1",
       "nombre": "pepe perez",
+      "celular": "6121234",
       "correo": "juan.perez@example.com",
       "contraseña": "contraseña123"
     },
     {
       "id": "2",
       "nombre": "María Gómez",
+      "celular": "1234567",
       "correo": "maria.gomez@example.com",
       "contraseña": "1234"
     },
     {
       "id": "3",
       "nombre": "Carlos Ruiz",
+      "celular": "6128239583",
       "correo": "carlos.ruiz@example.com",
       "contraseña": "4321"
     }

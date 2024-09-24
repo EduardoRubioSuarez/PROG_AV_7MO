@@ -13,7 +13,7 @@
 		
 		<form v-if="!acceso" @submit.prevent="onSubmit">
 			<fieldset>
-				<label>Nombre: </label>
+				<label>Correo: </label>
 				<input v-model="email" placeholder="email Here" name="">
 			</fieldset>
 			<fieldset>
@@ -26,12 +26,17 @@
 		</form>
 
 		<h3 v-if="acceso">Has accedido correctamente.</h3>
+
+		<button v-if="acceso" @click="mostrarFormulario">Agregar usuario</button>
+
 		<table v-if="acceso">
 			<thead>
 				<tr>
 					<th>ID</th>
 					<th>Nombre</th>
 					<th>Correo</th>
+					<th>Celular</th>
+					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -39,15 +44,38 @@
 					<td>{{ usuario.id }}</td>
 					<td>{{ usuario.nombre }}</td>
 					<td>{{ usuario.correo }}</td>
+					<td>{{ usuario.celular }}</td>
+					<td>
+						<button @click="editarUsuario(usuario)">Editar</button>
+						<button @click="eliminarUsuario(usuario.id)">Eliminar</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
+
+		<form v-if="acceso && mostrarForm" @submit.prevent="agregarNuevoUser">
+			<fieldset>
+				<label>Nombre: </label>
+				<input v-model="usuario_nombre" placeholder="nombre Here" name="">
+			</fieldset>
+			<fieldset>
+				<label>Correo: </label>
+				<input v-model="usuario_correo" placeholder="email Here" name="">
+			</fieldset>
+			<fieldset>
+				<label>Celular: </label>
+				<input v-model="usuario_celular" placeholder="celular Here" name="">
+			</fieldset>
+			<button type="submit">{{ editando ? 'Guardar cambios' : 'Agregar' }}</button>
+			<button type="button" @click="cancelarFormulario">Cancelar</button>
+		</form>
 
 	</div>
 
 	<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 	<script>
-	  const { createApp, ref } = Vue
+
+	  const { createApp } = Vue
 
 	createApp({
 	    data() {
@@ -55,7 +83,20 @@
 	        email: '',
 	        password: '',
 	        acceso: false,
-	        usuarios: []
+	        usuarios: [],
+			mostrarForm: false,
+			editando: false,
+			usuario_id: null,
+			usuario_nombre: '',
+			usuario_correo: '',
+			usuario_celular: ''
+	      }
+	    },
+	    mounted() {
+	      const autenticado = localStorage.getItem('acceso');
+	      if (autenticado) {
+	        this.acceso = true;
+	        this.cargarUsuariosDesdeLocalStorage();
 	      }
 	    },
 	    methods: {
@@ -63,12 +104,15 @@
 	        fetch('./vue.json')
 	          .then(response => response.json())
 	          .then(datos => {
-	            datos.usuarios.forEach(usuario => {
-	              if (usuario.correo === this.email && usuario.contraseña === this.password) {
-	                this.acceso = true;
-	                this.cargarUsuarios(datos.usuarios);
-	              }
-	            });
+	            const usuarioValido = datos.usuarios.find(usuario => usuario.correo === this.email && usuario.contraseña === this.password);
+	            if (usuarioValido) {
+	              this.acceso = true;
+	              localStorage.setItem('acceso', 'true');
+	              this.cargarUsuarios(datos.usuarios);
+	              this.guardarUsuariosEnLocalStorage(datos.usuarios);
+	            } else {
+	              alert('Credenciales incorrectas');
+	            }
 	          })
 	          .catch(() => {
 	            console.log('Error al cargar los datos');
@@ -76,9 +120,67 @@
 	      },
 	      cargarUsuarios(usuarios) {
 	        this.usuarios = usuarios;
-	      }
+	      },
+	      cargarUsuariosDesdeLocalStorage() {
+	        const usuariosGuardados = localStorage.getItem('usuarios');
+	        if (usuariosGuardados) {
+	          this.usuarios = JSON.parse(usuariosGuardados);
+	        }
+	      },
+	      guardarUsuariosEnLocalStorage(usuarios) {
+	        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+	      },
+		  mostrarFormulario() {
+			this.resetFormulario();
+			this.mostrarForm = true;
+		  },
+		  agregarNuevoUser() {
+			if (this.editando) {
+				const usuario = this.usuarios.find(u => u.id === this.usuario_id);
+				if (usuario) {
+					usuario.nombre = this.usuario_nombre;
+					usuario.correo = this.usuario_correo;
+					usuario.celular = this.usuario_celular;
+				}
+			} else {
+				const nuevoUsuario = {
+					id: this.usuarios.length + 1,
+					nombre: this.usuario_nombre,
+					correo: this.usuario_correo,
+					celular: this.usuario_celular
+				};
+				this.usuarios.push(nuevoUsuario);
+			}
+			this.guardarUsuariosEnLocalStorage(this.usuarios);
+			this.resetFormulario();
+			this.mostrarForm = false;
+		  },
+		  editarUsuario(usuario) {
+			this.usuario_id = usuario.id;
+			this.usuario_nombre = usuario.nombre;
+			this.usuario_correo = usuario.correo;
+			this.usuario_celular = usuario.celular;
+			this.editando = true;
+			this.mostrarForm = true;
+		  },
+		  eliminarUsuario(id) {
+			this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
+			this.guardarUsuariosEnLocalStorage(this.usuarios);
+		  },
+		  cancelarFormulario() {
+			this.resetFormulario();
+			this.mostrarForm = false;
+		  },
+		  resetFormulario() {
+			this.usuario_id = null;
+			this.usuario_nombre = '';
+			this.usuario_correo = '';
+			this.usuario_celular = '';
+			this.editando = false;
+		  }
 	    }
 	  }).mount('#main')
+
 	</script>
 </body>
 </html>
