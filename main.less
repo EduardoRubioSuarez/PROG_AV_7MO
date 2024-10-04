@@ -1,0 +1,30 @@
+@base-color: #37ff00;
+@colors: #3e4bd5, #40be68, #4acecc, #f6a730, #cf4747;
+
+
+body{
+    background-color: rgb(153, 133, 224);
+}
+h1{
+    background-color: rgb(90, 215, 111);
+}
+legend{
+    color: @base-color;
+}
+.cont(@count) when (@count <= 5) {
+    li:nth-child(@{count}){
+        background-color: extract(@colors,@count);
+        border-style: dotted;
+        border-width: 2px;
+    }
+    .cont((@count + 1));
+
+}
+ul{
+    .cont(0)
+}
+button{
+    border-radius: 5px;
+    border-width: 0;
+    box-shadow: rgb(85, 91, 255) 0px 0px 0px 1px, rgb(31, 193, 27) 0px 0px 0px 2px, rgb(255, 217, 19) 0px 0px 0px 3px, rgb(255, 156, 85) 0px 0px 0px 4px, rgb(255, 85, 85) 0px 0px 0px 5px;
+}
