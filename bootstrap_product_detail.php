@@ -82,6 +82,7 @@
                     </div>
                     <div class="list-group col-8">
                         <h5 class="card-title mt-3">Corolla AE86</h5>
+                        <h3>$100,000 MXN</h3>
                         <p class="card-text">La generación Toyota AE86 del Toyota Corolla Levin y Toyota Sprinter Trueno, es un pequeño cupé ligero o hatchback introducido por Toyota en 1983 como parte de la quinta generación del Toyota Corolla. También es conocido como "Hachi-Roku (ハチロク?)", por 8 y 6 en japonés, gracias al Manga/Anime "頭文字D/ Initial D". Para el propósito de la brevedad, el código privilegiado del chasis "AE86" muestra el modelo de tracción trasera (RWD) de 1600 cc de la gama. En el clásico código de Toyota, la "A" representa el motor que llegó en el coche de la serie 4A-GE, mientras que la "E" representa el Corolla, "8" representa la quinta generación (serie E80) y "6" representa la variación dentro de esta generación, ya que algunos han pensado que el "86" representaba el año 1986 como su año de fabricación.</p>
                         <a href="#" class="btn btn-primary col-2">Go somewhere</a>
                     </div>
