@@ -1,3 +1,9 @@
+<?php
+include_once("productController.php");
+$productController = new ProductController();
+$products = $productController->getAllProducts($_SESSION['api_token']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,30 +17,30 @@
 
   <!-- Sidebar -->
   <div class="d-flex bg-secondary">
-    <div class="bg-dark text-white p-3 vh-100 w-35 d-none d-md-block">
+    <div class="bg-dark text-white p-3 min-vh-100 w-35 d-none d-md-block">
       <h4 class="text-white">Sidebar</h4>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
+          <a class="nav-link active text-white" aria-current="page" href="">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Dashboard</a>
+          <a class="nav-link text-white" href="">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Orders</a>
+          <a class="nav-link text-white" href="">Orders</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Products</a>
+          <a class="nav-link text-white" href="">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Customers</a>
+          <a class="nav-link text-white" href="">Customers</a>
         </li>
       </ul>
     </div>
 
     <!-- Main content -->
     <div class="flex-grow-1">
-      <!-- Navbar -->
+
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar scroll</a>
@@ -44,10 +50,10 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link" href="">Link</a>
               </li>
             </ul>
             <form class="d-flex" role="search">
@@ -56,12 +62,12 @@
             </form>
             <ul class="navbar-nav ms-3">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   mdo
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Profile</a></li>
-                  <li><a class="dropdown-item" href="#">Logout</a></li>
+                  <li><a class="dropdown-item" href="">Profile</a></li>
+                  <li><a class="dropdown-item" href="">Logout</a></li>
                 </ul>
               </li>
             </ul>
@@ -69,44 +75,117 @@
         </div>
       </nav>
 
-      <!-- Card section -->
-      <div class="container">
-        <div class="row mt-4">
-          <div class="col-md-4">
-              <div class="card">
-                  <div class="card-body">
-                      <img src="media/ae86.png" class="img-fluid mx-auto d-block w-70" alt="AE86">
-                      <h5 class="card-title mt-3">Corolla AE86</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
+    <div class="container-fluid">
+      <br>
+      <div class="container d-flex">
+        <a href='#' class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#agregarModal">Agregar</a>
+      </div>
+      <br>
+      <div class="row">
+        <?php foreach ($products as $product) : ?>
+          <div class="col-4 mb-3">
+            <div class="card">
+              <img src=<?= $product->cover ?> class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title"><?= $product->name ?></h5>
+                <p class="card-text">
+                  <?= $product->description ?>
+                </p>
+                <a href=<?= 'bootstrap_product_detail.php?slug=' . $product->slug ?> class="btn btn-primary">Ver producto</a>
+                <a href='#' class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editarModal">Editar</a>
+                <a href='#' class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#eliminarModal">Eliminar</a>
               </div>
+            </div>
           </div>
-          <div class="col-md-4">
-              <div class="card">
-                  <div class="card-body">
-                      <img src="media/lancer.jpg" class="img-fluid mx-auto d-block w-70" alt="EVO">
-                      <h5 class="card-title mt-3">Subaru WRX</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4">
-              <div class="card">
-                  <div class="card-body">
-                      <img src="media/wrx.jpg" class="img-fluid mx-auto d-block w-70" alt="WRX">
-                      <h5 class="card-title mt-3">Lancer EVO</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                  </div>
-              </div>
-          </div>
+        <?php endforeach ?>
+      </div>
+    </div>
+      
+    </div>
+      
+  </div>
+
+  <!-- Modal para Agregar -->
+  <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="agregarModalLabel">Agregar Producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario de agregar -->
+          <form>
+            <div class="mb-3">
+              <label for="nombreProducto" class="form-label">Nombre del Producto</label>
+              <input type="text" class="form-control" id="nombreProducto">
+            </div>
+            <div class="mb-3">
+              <label for="precioProducto" class="form-label">Precio</label>
+              <input type="number" class="form-control" id="precioProducto">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Editar -->
+  <div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarModalLabel">Editar Producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Formulario de editar -->
+          <form>
+            <div class="mb-3">
+              <label for="nombreProductoEditar" class="form-label">Nombre del Producto</label>
+              <input type="text" class="form-control" id="nombreProductoEditar">
+            </div>
+            <div class="mb-3">
+              <label for="precioProductoEditar" class="form-label">Precio</label>
+              <input type="number" class="form-control" id="precioProductoEditar">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-warning">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para Eliminar -->
+  <div class="modal fade" id="eliminarModal" tabindex="-1" aria-labelledby="eliminarModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="eliminarModalLabel">Eliminar Producto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ¿Estás seguro de que deseas eliminar este producto?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger">Eliminar</button>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- Bootstrap JS and dependencies -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
 </body>
 </html>

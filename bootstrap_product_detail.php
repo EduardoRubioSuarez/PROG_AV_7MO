@@ -1,3 +1,8 @@
+<?php
+include_once("productController.php");
+$productController = new ProductController();
+$product = $productController->getProductBySlug($_GET['slug']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,24 +15,24 @@
 <body>
 
   <!-- Sidebar -->
-<div class="d-flex bg-secondary">
-    <div class="bg-dark text-white p-3 vh-120 w-35 d-none d-md-block">
+  <div class="d-flex bg-secondary">
+    <div class="bg-dark text-white p-3 min-vh-100 w-35 d-none d-md-block">
       <h4 class="text-white">Sidebar</h4>
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link active text-white" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Dashboard</a>
+          <a class="nav-link text-white" href="">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Orders</a>
+          <a class="nav-link text-white" href="">Orders</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Products</a>
+          <a class="nav-link text-white" href="">Products</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="#">Customers</a>
+          <a class="nav-link text-white" href="">Customers</a>
         </li>
       </ul>
     </div>
@@ -69,21 +74,19 @@
         </div>
       </nav>
 
-        <hr>
-
         <div class="container-fluid">
             <div class="card">
                 <ul class="list-group list-group-flush">
-                    <h2 class="list-group-item">Info del carro</h2>
+                    <h2 class="list-group-item">Información del producto</h2>
                 </ul>
                 <div class="card-body input-group">
                     <div class="col-4">
-                        <img src="media/ae86.png" class="img-fluid d-none d-md-block w-70" alt="AE86">
+                    <img src="<?= $product->cover ?>" class="img-fluid d-none d-md-block mw-100" style="max-height: 300px;" alt="producto">
                     </div>
                     <div class="list-group col-8">
-                        <h5 class="card-title mt-3">Corolla AE86</h5>
-                        <h3>$100,000 MXN</h3>
-                        <p class="card-text">La generación Toyota AE86 del Toyota Corolla Levin y Toyota Sprinter Trueno, es un pequeño cupé ligero o hatchback introducido por Toyota en 1983 como parte de la quinta generación del Toyota Corolla. También es conocido como "Hachi-Roku (ハチロク?)", por 8 y 6 en japonés, gracias al Manga/Anime "頭文字D/ Initial D". Para el propósito de la brevedad, el código privilegiado del chasis "AE86" muestra el modelo de tracción trasera (RWD) de 1600 cc de la gama. En el clásico código de Toyota, la "A" representa el motor que llegó en el coche de la serie 4A-GE, mientras que la "E" representa el Corolla, "8" representa la quinta generación (serie E80) y "6" representa la variación dentro de esta generación, ya que algunos han pensado que el "86" representaba el año 1986 como su año de fabricación.</p>
+                        <h5 class="card-title mt-3"><?= $product->name ?></h5>
+                        <h3>$<?= $product->presentations[0]->price[0]->amount ?></h3>
+                        <p class="card-text"><?= $product->description ?></p>
                         <a href="#" class="btn btn-primary col-2">Go somewhere</a>
                     </div>
                 </div>
@@ -130,6 +133,6 @@
 
     </div>
 </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 </body>
 </html>
